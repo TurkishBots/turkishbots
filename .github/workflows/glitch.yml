@@ -3,17 +3,18 @@ name: Push Glitch
 on:
   pull_request:
     types: [closed]
-    jobs:
-    repo-sync:
-      if: github.event.pull_request.merged == true
-      runs-on: ubuntu-latest
-      steps:
-        - name: repo-sync
-          uses: wei/git-sync@v1
-          env:
-            SOURCE_REPO: "https://github.com/gamerboytr/turkishmethods-bot.git"
-            SOURCE_BRANCH: "master"
-            DESTINATION_REPO: ${{ secrets.glitch_git_URL }}
-            DESTINATION_BRANCH: "master"
-          with:
-            args: $SOURCE_REPO $SOURCE_BRANCH $DESTINATION_REPO $DESTINATION_BRANCH
+
+jobs:
+  repo-sync:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: repo-sync
+        uses: wei/git-sync@v3
+        env:
+          source_repo: "https://github.com/gamerboytr/turkishmethods-bot.git"
+          source_branch: "master"
+          destination_repo: ${{ secrets.glitch_git_URL }}
+          destination_branch: "master"
+        with:
+          args: $source_repo $source_branch $destination_repo $destination_branch
