@@ -16,7 +16,7 @@
 		"turkish"
 	],
 	"author": "GamerboyTR",
-	"license": "GPL 3.0",
+	"license": "GPL-3.0",
 	"dependencies": {
 		"@discordjs/builders": "^0.12.0",
 		"@discordjs/rest": "^0.3.0",
