@@ -3,7 +3,7 @@ require("dotenv").config({ path: "../.env" });
 module.exports = {
 	token: process.env.BOT_TOKEN,
 	clientSecret: process.env.BOT_SECRET,
-	prefix: "B?",
+	prefix: process.platform === "win32" ? "B?" : "?",
 	siteURL: "https://turkishmethods.com",
 	guild: "841385554792415282",
 	supportServer: "https://discord.gg/turkishmethods",

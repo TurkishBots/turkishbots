@@ -21,26 +21,10 @@ module.exports = async member => {
 		ctx.drawImage(pfp, x, y);
 		ctx.fillStyle = "#ffffff";
 		ctx.font = "35px sans-serif";
-		let text = `Hoş geldin ${member.user.tag}!`;
+		let text = `Gittiğine üzüldük ${member.user.tag}!`;
 		x = canvas.width / 2 - ctx.measureText(text).width / 2;
 		ctx.fillText(text, x, 60 + pfp.height);
-		ctx.font = "30px sans-serif";
-		text = `Üye #${member.guild.memberCount}`;
-		x = canvas.width / 2 - ctx.measureText(text).width / 2;
-		ctx.fillText(text, x, 100 + pfp.height);
-		ctx.font = "27px sans-serif";
-		x = canvas.width / 2 - ctx.measureText(text).width / 2;
-		if (new Date(member.user.createdAt).getTime() > Date.now() - 3 * 24 * 60 * 60 * 1000) {
-			text = "(!) Spam";
-			ctx.fillStyle = "red";
-			x = x + 30;
-		} else {
-			text = `Oluşturma Tarihi : ${new Date(member.user.createdAt).toLocaleDateString()}`;
-			ctx.fillStyle = "#ffffff";
-			x = x - 100;
-		}
-		ctx.fillText(text, x, 130 + pfp.height);
-		const attachment = new MessageAttachment(canvas.toBuffer(), "Hoşgeldin_Dostum.png");
+		const attachment = new MessageAttachment(canvas.toBuffer(), "Görüşürüz_Dostum.png");
 		member.guild.channels.cache.get("913518864590073866").send({ files: [attachment] });
 	}
 };
