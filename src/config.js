@@ -1,9 +1,9 @@
 require("dotenv").config({ path: "../.env" });
 
-module.exports = {
+const conf = {
 	token: process.env.BOT_TOKEN,
 	clientSecret: process.env.BOT_SECRET,
-	prefix: process.platform === "win32" ? "B?" : "?",
+	isDev: require("os").userInfo().username === "GamerboyTR",
 	siteURL: "https://turkishmethods.com",
 	guild: "841385554792415282",
 	supportServer: "https://discord.gg/turkishmethods",
@@ -37,3 +37,7 @@ module.exports = {
 		bullet: "•",
 	},
 };
+
+conf.prefix = conf.isDev ? "B?" : "?";
+
+module.exports = conf;
