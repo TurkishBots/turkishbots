@@ -2,12 +2,17 @@
 	"name": "turkishbots-beta",
 	"version": "0.7.0",
 	"description": "TurkishMethods İçin Discord Botu",
-	"main": "./src/shard.js",
+	"main": "./bin/shard.js",
 	"scripts": {
+		"build": "rimraf bin && tsc && npm run copy",
+		"watch": "tsc --watch",
+		"clean": "rimraf bin",
+		"copy": "npm-run-all copy:*",
+		"copy:img": "copyfiles -f -a \"src/img/*\" \"bin/img\"",
 		"dev": "dev.bat",
-		"start": "cd src && node ./shard.js",
-		"lint": "eslint src/**/*.js",
-		"lint:fix": "eslint src/**/*.js --fix"
+		"start": "cd bin && node shard",
+		"lint": "eslint src/**/*.ts",
+		"lint:fix": "eslint src/**/*.ts --fix"
 	},
 	"keywords": [
 		"turkishmethods",
@@ -44,11 +49,24 @@
 	},
 	"private": true,
 	"devDependencies": {
+		"@types/adm-zip": "^0.5.0",
+		"@types/common-tags": "^1.8.1",
+		"@types/express": "^4.17.13",
+		"@types/figlet": "^1.5.4",
+		"@types/math-expression-evaluator": "^1.2.2",
+		"@types/ms": "^0.7.31",
+		"@types/node": "^17.0.24",
+		"@typescript-eslint/eslint-plugin": "^5.19.0",
+		"@typescript-eslint/parser": "^5.19.0",
+		"copyfiles": "^2.4.1",
 		"eslint": "^7.32.0",
 		"eslint-config-standard": "^16.0.3",
 		"eslint-plugin-import": "^2.26.0",
 		"eslint-plugin-node": "^11.1.0",
-		"eslint-plugin-promise": "^5.2.0"
+		"eslint-plugin-promise": "^5.2.0",
+		"npm-run-all": "^4.1.5",
+		"rimraf": "^3.0.2",
+		"typescript": "^4.6.3"
 	},
 	"engines": {
 		"node": ">=16.x"

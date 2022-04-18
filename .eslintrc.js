@@ -1,13 +1,15 @@
 module.exports = {
 	env: {
-		commonjs: true,
 		es2021: true,
 		node: true,
 	},
 	extends: ["standard"],
+	parser: "@typescript-eslint/parser",
 	parserOptions: {
-		ecmaVersion: "latest",
+		ecmaVersion: 12,
+		sourceType: "module",
 	},
+	plugins: ["@typescript-eslint"],
 	rules: {
 		"no-tabs": "off",
 		"no-console": "off",
@@ -20,5 +22,6 @@ module.exports = {
 		"spaced-comment": "off",
 		"space-before-function-paren": "off",
 		"no-eval": "warn",
+		"dot-notation": "off",
 	},
 };
