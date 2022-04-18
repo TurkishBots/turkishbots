@@ -1,5 +1,7 @@
 import { Message, Permissions } from "discord.js";
 import { DiscordCommand } from "../types";
+import { getClosest } from "../util/Functions";
+
 const talkedRecently = {};
 
 const formatTime = (time: string | number) => {
@@ -33,7 +35,7 @@ const formatPerm = (perm: string | number | bigint) => {
 export default (message: Message) => {
 	if (message.author.bot) return;
 	const client = message.client;
-	const config = client.config;
+	const { config } = client;
 
 	if (!message.content.startsWith(config.prefix) || message.content === config.prefix) return;
 	const command = message.content.split(" ")[0].slice(config.prefix.length);
@@ -43,7 +45,16 @@ export default (message: Message) => {
 	let cmd: DiscordCommand;
 	if (client.commands.has(command)) cmd = client.commands.get(command);
 	else if (client.aliases.has(command)) cmd = client.commands.get(client.aliases.get(command));
-	if (!cmd || cmd.conf.disabled === false) return message.reply(`${config.emojis.error} ${unicodechars.bullet} Bilinmeyen komut! Komut listesi için \`${config.prefix}yardım\``).then(m => setTimeout(() => m?.delete?.(), config.deleteInterval));
+	if (!cmd || cmd.conf.disabled === false) {
+		const closest = getClosest(
+			client.commands.filter((c: DiscordCommand) => !c.conf.disabled).map((c: DiscordCommand) => c.help.name),
+			command
+		);
+		message
+			.reply(`${config.emojis.error} ${unicodechars.bullet} Bilinmeyen komut! Komut listesi için \`${config.prefix}yardım\`${closest ? `\n${config.emojis.question_mark} ${unicodechars.bullet} Şunumu demek istediniz \`${config.prefix}${closest}\`?` : ""}`)
+			.then(m => setTimeout(() => m?.delete?.(), config.deleteInterval));
+		return;
+	}
 	if (cmd.conf.guildOnly && (message.channel.type === "DM" || !message.guild)) return message.reply(`${config.emojis.error} ${unicodechars.bullet} Bu komutu sadece sunucu içinde kullanabilirsin!`).then(m => setTimeout(() => m?.delete?.(), config.deleteInterval));
 	if (!config.owners.includes(message.author.id) && message.channel.type !== "DM" && message?.guild?.id === config.guild && cmd.conf.category === "Eğlence" && message?.channel?.id !== "938195606567010374") {
 		return message.reply(`${config.emojis.error} ${unicodechars.bullet} Eğlence komutlarını sadece <#938195606567010374> kanalında kullanabilirsin!`).then(m => setTimeout(() => m?.delete?.(), config.deleteInterval));

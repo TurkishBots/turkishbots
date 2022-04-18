@@ -35,6 +35,7 @@ const conf = {
 		compile_dots: "<a:dots:963443763773046804>",
 		typescript: "<:TypeScript:965671929413529730>",
 		javascript: "<:JavaScript:965672101078003773>",
+		question_mark: "<:question_mark:965719852251746304>",
 	},
 	unicodes: {
 		bullet: "•",
