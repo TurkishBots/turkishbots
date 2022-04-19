@@ -22,7 +22,7 @@ const komutYenile: DiscordCommand = {
 
 		try {
 			delete require.cache[require.resolve(`./${command}.js`)];
-			const pull = require(`./${command}.js`);
+			const pull: DiscordCommand = require(`./${command}.js`).default;
 			client.commands.set(pull.help.name, pull);
 
 			message.reply({ content: `${emojis.success} ${unicode.bullet} Yeniden başlatıldı: \`${command}\``, ephemeral: true });

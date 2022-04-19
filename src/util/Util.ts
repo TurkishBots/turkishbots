@@ -1,3 +1,4 @@
+import { Collection, Message, TextChannel, User } from "discord.js";
 import request from "node-superfetch";
 import crypto from "crypto";
 const { IMGUR_KEY } = process.env;
@@ -84,7 +85,7 @@ export default class Util {
 	static async awaitPlayers(msg: any, max: any, min: number, { text = "join game", time = 30000 } = {}) {
 		const joined = [];
 		joined.push(msg.author.id);
-		const filter = (res: { author: { id: any }; content: string }) => {
+		const filter = (res: Message) => {
 			if (msg.author.bot) return false;
 			if (joined.includes(res.author.id)) return false;
 			if (res.content.toLowerCase() !== text.toLowerCase()) return false;
@@ -97,15 +98,13 @@ export default class Util {
 		return verify.map((message: { author: any }) => message.author);
 	}
 
-	static async verify(channel: { awaitMessages: (arg0: { filter: (res: any) => boolean; max: number; time: number; errors: string[] }) => Promise<any> }, user: { id: any }, time = 30000) {
-		const filter = (res: { author: { id: any }; content: string }) => res.author.id === user.id && (yes.includes(res.content.toLowerCase()) || no.includes(res.content.toLowerCase()));
+	static async verify(channel: TextChannel, user: User, time = 30000) {
+		const filter = (res: Message) => res.author.id === user.id && (yes.includes(res.content.toLowerCase()) || no.includes(res.content.toLowerCase()));
 
 		let err = false;
 		const verify = await channel.awaitMessages({ filter, max: 1, time, errors: ["time"] }).catch(() => (err = true));
 		if (err) return false;
-		const choice = verify.first().content.toLowerCase();
-		if (yes.includes(choice)) return true;
-		if (no.includes(choice)) return false;
-		return false;
+		const choice = (verify as Collection<string, Message<boolean>>).first().content.toLowerCase();
+		return yes.includes(choice);
 	}
 }
