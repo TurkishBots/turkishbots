@@ -56,9 +56,6 @@ export default (message: Message) => {
 		return;
 	}
 	if (cmd.conf.guildOnly && (message.channel.type === "DM" || !message.guild)) return message.reply(`${config.emojis.error} ${unicodechars.bullet} Bu komutu sadece sunucu içinde kullanabilirsin!`).then(m => setTimeout(() => m?.delete?.(), config.deleteInterval));
-	if (!config.owners.includes(message.author.id) && message.channel.type !== "DM" && message?.guild?.id === config.guild && cmd.conf.category === "Eğlence" && message?.channel?.id !== "938195606567010374") {
-		return message.reply(`${config.emojis.error} ${unicodechars.bullet} Eğlence komutlarını sadece <#938195606567010374> kanalında kullanabilirsin!`).then(m => setTimeout(() => m?.delete?.(), config.deleteInterval));
-	}
 
 	const hasPerm = (permLevel: any, message: Message): boolean => {
 		if (config.owners.includes(message.author.id) || !permLevel || message.member.permissions.has(Permissions.FLAGS[permLevel])) return true;
