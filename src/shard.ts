@@ -19,7 +19,6 @@ const manager = new ShardingManager(startFile, {
 	totalShards: "auto",
 	token,
 	respawn: true,
-	mode: "process",
 });
 
 manager.on("shardCreate", shard => {

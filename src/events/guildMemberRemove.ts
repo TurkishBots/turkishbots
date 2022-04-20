@@ -15,7 +15,7 @@ export default async (member: GuildMember) => {
 		let x = 0;
 		let y = 0;
 		ctx.drawImage(background, x, y, canvas.width, canvas.height);
-		const pfp = await Canvas.loadImage(member.user.displayAvatarURL({ format: "png", size: 1024 }));
+		const pfp = await Canvas.loadImage(member.user.displayAvatarURL({ format: "png", size: 128 }));
 		x = canvas.width / 2 - pfp.width / 2;
 		y = 25;
 		ctx.drawImage(pfp, x, y);
