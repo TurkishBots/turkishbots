@@ -1,18 +1,19 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { DiscordCommand } from "../types";
+import { Permissions } from "discord.js";
 import { sleep } from "../util/Functions";
 
 const paraCevir: DiscordCommand = {
 	conf: {
-		aliases: ["paraçevir"],
-		permLevel: 0,
-		category: "Eğlence",
+		aliases: ["paraçevir", "yazı-tura", "yazıtura"],
+		permLevel: Permissions.DEFAULT,
+		category: "Eğlence"
 	},
 
 	help: {
 		name: "para-çevir",
 		description: "Yazı tura oyununu oynarsınız.",
-		usage: "para-çevir [yazı|tura]",
+		usage: "para-çevir [yazı|tura]"
 	},
 
 	slashCommand: () =>
@@ -20,9 +21,10 @@ const paraCevir: DiscordCommand = {
 			option
 				.setName("yüzü")
 				.setDescription("Paranın yüzü (yazı/tura)")
+				// @ts-ignore
 				.setChoices([
 					["yazı", "yazı"],
-					["tura", "tura"],
+					["tura", "tura"]
 				])
 				.setRequired(false)
 		),
@@ -33,7 +35,7 @@ const paraCevir: DiscordCommand = {
 		sleep(2000);
 		const isWin = Math.random() >= 0.5;
 		msg.edit(`**${message.author.username}** 1 Türk Lirasını havaya attı ve **${coinFace}**yı seçti!\nPara elinde durdu veee **${!isWin ? (coinFace === "yazı" ? "tura" : "yazı") : coinFace}** geldi, **${isWin ? "kazandın" : "kaybettin"}**!`);
-	},
+	}
 };
 
 export default paraCevir;

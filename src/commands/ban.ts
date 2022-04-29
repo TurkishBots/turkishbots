@@ -5,15 +5,15 @@ import { MessageEmbed, Permissions } from "discord.js";
 const ban: DiscordCommand = {
 	conf: {
 		aliases: ["yasakla", "sunucudanyasakla", "sunucudan-yasakla", "banla"],
-		permLevel: "BAN_MEMBERS",
+		permLevel: Permissions.DEFAULT,
 		category: "Moderasyon",
-		guildOnly: true,
+		guildOnly: true
 	},
 
 	help: {
 		name: "ban",
 		description: "İstediğiniz kullanıcı sunucudan yasaklar.",
-		usage: "ban <@kullanıcı> [yasaklanma-sebebi]",
+		usage: "ban <@kullanıcı> [yasaklanma-sebebi]"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addUserOption(option => option.setName("kullanıcı").setDescription("Sunucudan yasaklanıcak kullanıcı").setRequired(true)).addStringOption(option => option.setName("sebep").setDescription("Yasaklanma sebebi").setRequired(false)),
@@ -48,7 +48,7 @@ const ban: DiscordCommand = {
 			embed.setThumbnail("https://www.onlygfx.com/wp-content/uploads/2017/11/banned-stamp-2-3.png");
 			message.reply({ embeds: [embed] });
 		}
-	},
+	}
 };
 
 export default ban;

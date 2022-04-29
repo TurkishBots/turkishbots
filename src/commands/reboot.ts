@@ -6,13 +6,13 @@ const reboot: DiscordCommand = {
 	conf: {
 		aliases: ["yenile", "yb", "botreboot", "bot-reboot"],
 		permLevel: "OWNER",
-		category: "Admin",
+		category: "Admin"
 	},
 
 	help: {
 		name: "reboot",
 		description: "Botu yeniden başlatır.",
-		usage: "reboot",
+		usage: "reboot"
 	},
 
 	slashCommand: () => new SlashCommandBuilder(),
@@ -42,7 +42,7 @@ const reboot: DiscordCommand = {
 				msg.reactions.removeAll().catch(() => {});
 				if (!collected[0]) msg.reply(`${emojis.error} ${unicode.bullet} Yeniden başlatma iptal edildi.`);
 			});
-	},
+	}
 };
 
 export default reboot;

@@ -18,8 +18,8 @@ const conf = {
 			url: `https://discord.com/api/webhooks/940638138290810920/${process.env.WEBHOOKS_LOG}`,
 			id: "940638138290810920",
 			token: process.env.WEBHOOKS_LOG,
-			channel: "940620150061826108",
-		},
+			channel: "940620150061826108"
+		}
 	},
 	emojis: {
 		success: "<:success:940304315371884625>",
@@ -35,11 +35,11 @@ const conf = {
 		compile_dots: "<a:dots:963443763773046804>",
 		typescript: "<:TypeScript:965671929413529730>",
 		javascript: "<:JavaScript:965672101078003773>",
-		question_mark: "<:question_mark:965719852251746304>",
+		question_mark: "<:question_mark:965719852251746304>"
 	},
 	unicodes: {
-		bullet: "•",
-	},
+		bullet: "•"
+	}
 };
 
 conf.prefix = conf.isDev ? "B?" : conf.prefix;

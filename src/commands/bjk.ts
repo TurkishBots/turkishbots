@@ -1,19 +1,19 @@
 import { DiscordCommand } from "../types";
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageAttachment } from "discord.js";
+import { MessageAttachment, Permissions } from "discord.js";
 import Jimp from "jimp";
 
 const bjk: DiscordCommand = {
 	conf: {
 		aliases: [],
-		permLevel: 0,
-		category: "Eğlence",
+		permLevel: Permissions.DEFAULT,
+		category: "Eğlence"
 	},
 
 	help: {
 		name: "bjk",
 		description: "Profil fotorafınıza beşiktaş efekti ekler.",
-		usage: "bjk [@kullanıcı]",
+		usage: "bjk [@kullanıcı]"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addUserOption(option => option.setName("kullanıcı").setDescription("Kullanıcı").setRequired(false)),
@@ -30,7 +30,7 @@ const bjk: DiscordCommand = {
 					message.reply({ files: [new MessageAttachment(buffer)], ephemeral: true });
 				})
 		);
-	},
+	}
 };
 
 export default bjk;

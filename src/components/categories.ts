@@ -1,23 +1,23 @@
 export default [
 	{
 		name: "Genel",
-		alisas: ["general"],
+		alisas: ["general"]
 	},
 	{
 		name: "Sunucu",
-		alisas: ["server", "sw", "sv"],
+		alisas: ["server", "sw", "sv"]
 	},
 	{
 		name: "Eğlence",
-		alisas: ["fun", "funny"],
+		alisas: ["fun", "funny"]
 	},
 	{
 		name: "Moderasyon",
-		alisas: ["moderation"],
+		alisas: ["moderation"]
 	},
 	{
 		name: "Admin",
 		alisas: [],
-		admin: true,
-	},
+		admin: true
+	}
 ];

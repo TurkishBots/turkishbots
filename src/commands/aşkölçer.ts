@@ -1,20 +1,20 @@
 import { DiscordCommand } from "../types";
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { MessageEmbed, Permissions } from "discord.js";
 import moment from "moment";
 
 const askolcer: DiscordCommand = {
 	conf: {
 		aliases: ["aşk-ölçer", "ask-olcer", "askolcer", "ask", "aşk"],
-		permLevel: 0,
+		permLevel: Permissions.DEFAULT,
 		category: "Eğlence",
-		guildOnly: true,
+		guildOnly: true
 	},
 
 	help: {
 		name: "aşkölçer",
 		description: "İki kullanıcı sarasındaki aşkı ölçer.",
-		usage: "aşkölçer <@kullanıcı1> [@kullanıcı2]",
+		usage: "aşkölçer <@kullanıcı1> [@kullanıcı2]"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addUserOption(option => option.setDescription("İlk kullanıcı").setName("kullanıcı").setRequired(true)).addMentionableOption(option => option.setDescription("İkinci kullanıcı").setName("ikinci_kullanıcı").setRequired(false)),
@@ -70,7 +70,7 @@ const askolcer: DiscordCommand = {
 		msgEmbed.setColor(bhearth.length > hearth.length ? "#0d0d0d" : "RED");
 		msgEmbed.setTimestamp();
 		message.reply({ embeds: [msgEmbed] });
-	},
+	}
 };
 
 export default askolcer;

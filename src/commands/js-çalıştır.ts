@@ -6,13 +6,13 @@ const jsCalistir: DiscordCommand = {
 	conf: {
 		aliases: ["jskodçalıştır", "javascriptçalıştır", "jsçalıştır"],
 		permLevel: "GAMER",
-		category: "Admin",
+		category: "Admin"
 	},
 
 	help: {
 		name: "js-çalıştır",
 		description: "Botta bir JavaScript kodu çalıştırır.",
-		usage: "js-çalıştır <js-kodu>",
+		usage: "js-çalıştır <js-kodu>"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addStringOption(option => option.setName("kod").setDescription("Çalıştırılıcak JavaScript kodu").setRequired(true)),
@@ -49,7 +49,7 @@ const jsCalistir: DiscordCommand = {
 		} catch (err) {
 			message.reply({ content: `${emojis.error} ${unicode.bullet} Bir hata oluştu\n\`\`\`js\n${err.toString()}\`\`\``, ephemeral: true });
 		}
-	},
+	}
 };
 
 export default jsCalistir;

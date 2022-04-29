@@ -1,19 +1,19 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { TextChannel, WebhookClient } from "discord.js";
+import { TextChannel, WebhookClient, Permissions } from "discord.js";
 import { DiscordCommand } from "../types";
 
 const fakeMesaj: DiscordCommand = {
 	conf: {
 		aliases: ["fakemesaj", "sahte-mesaj", "sahtemesaj"],
-		permLevel: "MODERATE_MEMBERS",
+		permLevel: Permissions.FLAGS.MODERATE_MEMBERS,
 		category: "Moderasyon",
-		guildOnly: true,
+		guildOnly: true
 	},
 
 	help: {
 		name: "fake-mesaj",
 		description: "Birine mesaj yazdırır.",
-		usage: "fake-mesaj <@kullanıcı> <mesaj>",
+		usage: "fake-mesaj <@kullanıcı> <mesaj>"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addUserOption(option => option.setName("kullanıcı").setDescription("Mesajın atılacağı kullanıcı").setRequired(true)).addStringOption(option => option.setName("mesaj").setDescription("Mesajın içeriği").setRequired(true)),
@@ -40,7 +40,7 @@ const fakeMesaj: DiscordCommand = {
 		} catch (err) {
 			message.reply({ content: `${emojis.error} ${unicode.bullet} Bir hata oluştu!\n\`\`\`js\n${err}\`\`\``, ephemeral: true });
 		}
-	},
+	}
 };
 
 export default fakeMesaj;

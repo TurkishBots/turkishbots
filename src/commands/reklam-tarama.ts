@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { MessageEmbed, Permissions } from "discord.js";
 import { DiscordCommand } from "../types";
 
 const adRegex = /(https?:\/\/(.*)\.(.*)|(discord)?\.gg\/(.*))/g;
@@ -7,15 +7,15 @@ const adRegex = /(https?:\/\/(.*)\.(.*)|(discord)?\.gg\/(.*))/g;
 const reklamTarama: DiscordCommand = {
 	conf: {
 		aliases: ["reklamtara", "reklam-tara", "reklamtarama"],
-		permLevel: "MODERATE_MEMBERS",
+		permLevel: Permissions.FLAGS.MODERATE_MEMBERS,
 		category: "Moderasyon",
-		guildOnly: true,
+		guildOnly: true
 	},
 
 	help: {
 		name: "reklam-tarama",
 		description: "Sunucudaki kullanıcıların isimini, oyununu ve durumunda reklam olup olmadığını kontrol eder .",
-		usage: "reklam-tarama",
+		usage: "reklam-tarama"
 	},
 
 	slashCommand: () => new SlashCommandBuilder(),
@@ -24,7 +24,7 @@ const reklamTarama: DiscordCommand = {
 		const catchedMembers = {
 			username: [],
 			game: [],
-			status: [],
+			status: []
 		};
 		message.guild.members.cache
 			.filter(member => !member.user.bot)
@@ -77,7 +77,7 @@ const reklamTarama: DiscordCommand = {
 				.trim() || "Durumunda reklam içeren hiç kullanıcı yok!"
 		);
 		message.reply({ embeds: [embed], ephemeral: true });
-	},
+	}
 };
 
 export default reklamTarama;

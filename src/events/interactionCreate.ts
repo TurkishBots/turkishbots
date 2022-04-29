@@ -1,7 +1,9 @@
 import { Interaction, Permissions } from "discord.js";
+import { DiscordCommand } from "../types";
 
-const formatPerm = (perm: string | bigint) => {
-	const perms = new Permissions(typeof perm === "string" ? Permissions.FLAGS[perm] : perm);
+const formatPerm = (perm: bigint | string) => {
+	if (typeof perm === "string") return perm;
+	const perms = new Permissions(perm);
 	if (perms.has("ADMINISTRATOR")) return "Yönetici";
 	if (perms.has("MANAGE_GUILD")) return "Sunucuyu Yönet";
 	if (perms.has("MANAGE_ROLES")) return "Rolleri Yönet";
@@ -31,17 +33,18 @@ export default (interaction: Interaction) => {
 
 	const params = interaction.options["_hoistedOptions"];
 	const unicodechars = config.unicodes;
-	const cmd = client.commands.get(commandName);
+	const cmd: DiscordCommand = client.commands.get(commandName);
 	if (cmd.conf.guildOnly && (interaction.channel.type === "DM" || !interaction.guild)) return interaction.reply({ content: `${config.emojis.error} ${unicodechars.bullet} Bu Slash komutunu sadece sunucu içinde kullanabilirsin!`, ephemeral: true });
 
-	const hasPerm = (permLevel: any, interaction: Interaction): boolean => {
-		if (config.owners.includes(interaction.user.id) || (permLevel === "GAMER" && interaction.user.id === "530043492014096384") || !permLevel || interaction.member.permissions["has"](Permissions.FLAGS[permLevel])) return true;
+	const hasPerm = (permLevel: bigint | string, interaction: Interaction): boolean => {
+		if (config.owners.includes(interaction.user.id) || (permLevel === "GAMER" && interaction.user.id === "530043492014096384") || permLevel === Permissions.DEFAULT || (typeof permLevel === "bigint" && interaction.member.permissions["has"](permLevel))) return true;
 		else return false;
 	};
 
 	if (hasPerm(cmd.conf.permLevel, interaction)) {
 		interaction["author"] = interaction.user;
 		try {
+			// @ts-ignore
 			cmd.execute({ client, message: interaction, args: params, emojis: config.emojis, unicode: unicodechars, isOwner: config.owners.includes(interaction.user.id), isSlash: true });
 		} catch (e) {
 			console.error(e);

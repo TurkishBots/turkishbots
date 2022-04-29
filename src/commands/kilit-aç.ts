@@ -1,19 +1,19 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { TextChannel } from "discord.js";
+import { TextChannel, Permissions } from "discord.js";
 import { DiscordCommand } from "../types";
 
 const kilitAc: DiscordCommand = {
 	conf: {
 		aliases: ["kilitaç", "unlock", "kanal-kilit-aç", "kanalkilitaç"],
-		permLevel: "MANAGE_CHANNELS",
+		permLevel: Permissions.FLAGS.MANAGE_CHANNELS,
 		category: "Moderasyon",
-		guildOnly: true,
+		guildOnly: true
 	},
 
 	help: {
 		name: "kilit-aç",
 		description: "Komutu kullandığınız kanaldaki kilidi açar.",
-		usage: "kilit-aç",
+		usage: "kilit-aç"
 	},
 
 	slashCommand: () => new SlashCommandBuilder(),
@@ -28,7 +28,7 @@ const kilitAc: DiscordCommand = {
 				console.error(error);
 			});
 		});
-	},
+	}
 };
 
 export default kilitAc;

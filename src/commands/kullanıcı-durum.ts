@@ -1,19 +1,19 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { MessageEmbed, Permissions } from "discord.js";
 import { DiscordCommand } from "../types";
 
 const kullainiciDurum: DiscordCommand = {
 	conf: {
 		aliases: [],
-		permLevel: 0,
+		permLevel: Permissions.DEFAULT,
 		category: "Genel",
-		guildOnly: true,
+		guildOnly: true
 	},
 
 	help: {
 		name: "kullanıcı-durum",
 		description: "Kullanıcının Discord'a nasıl bağlandığını öğrenirsiniz.",
-		usage: "kullanıcı-durum <@kullanıcı>",
+		usage: "kullanıcı-durum <@kullanıcı>"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addUserOption(option => option.setDescription("Durumuna bakılıcak kullanıcı").setName("kullanıcı").setRequired(true)),
@@ -50,7 +50,7 @@ const kullainiciDurum: DiscordCommand = {
 			}
 		} else embed.addField("Durum", "Çevrimdışı", true);
 		message.reply({ embeds: [embed], ephemeral: true });
-	},
+	}
 };
 
 export default kullainiciDurum;

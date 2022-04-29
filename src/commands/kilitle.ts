@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { TextChannel } from "discord.js";
+import { TextChannel, Permissions } from "discord.js";
 import ms from "ms";
 import { DiscordCommand } from "../types";
 
@@ -8,15 +8,15 @@ const formatTime = (time: string) => time.replaceAll("saniye", "second").replace
 const kilitle: DiscordCommand = {
 	conf: {
 		aliases: ["lock", "kanal-kilitle", "kanalkilitle"],
-		permLevel: "MANAGE_CHANNELS",
+		permLevel: Permissions.FLAGS.MANAGE_CHANNELS,
 		category: "Moderasyon",
-		guildOnly: true,
+		guildOnly: true
 	},
 
 	help: {
 		name: "kilitle",
 		description: "Komutu kullandığınız kanalı belirttiğiniz süre zarfında kilitler.",
-		usage: "kilitle <süre>",
+		usage: "kilitle <süre>"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addStringOption(option => option.setName("süre").setDescription("Kilitli kalıcak süre").setRequired(true)),
@@ -43,7 +43,7 @@ const kilitle: DiscordCommand = {
 					console.error(error);
 				})
 		);
-	},
+	}
 };
 
 export default kilitle;

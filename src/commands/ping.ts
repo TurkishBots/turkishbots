@@ -1,17 +1,18 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { DiscordCommand } from "../types";
+import { Permissions } from "discord.js";
 
 const ping: DiscordCommand = {
 	conf: {
 		aliases: ["botping", "bot-ping"],
-		permLevel: 0,
-		category: "Genel",
+		permLevel: Permissions.DEFAULT,
+		category: "Genel"
 	},
 
 	help: {
 		name: "ping",
 		description: "Botun pingini gösterir.",
-		usage: "ping",
+		usage: "ping"
 	},
 
 	slashCommand: () => new SlashCommandBuilder(),
@@ -30,7 +31,7 @@ const ping: DiscordCommand = {
 		const msg = await message.channel.send("Hesaplanıyor...");
 		message.reply({ content: `🏓**Pong!**\n**Mesaj gecikmesi**\n **${msg.createdTimestamp - message.createdTimestamp}ms** (${getStatus(msg.createdTimestamp - message.createdTimestamp)})\n**Socket gecikmesi**\n **${client.ws.ping}ms** (${getStatus(client.ws.ping)})`, ephemeral: true });
 		msg.delete();
-	},
+	}
 };
 
 export default ping;

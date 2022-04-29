@@ -1,19 +1,19 @@
 import { DiscordCommand } from "../types";
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { MessageEmbed, Permissions } from "discord.js";
 import translatte from "translatte";
 
 const ceviri: DiscordCommand = {
 	conf: {
 		aliases: ["çevir"],
-		permLevel: 0,
-		category: "Genel",
+		permLevel: Permissions.DEFAULT,
+		category: "Genel"
 	},
 
 	help: {
 		name: "çeviri",
 		description: "Bir kelimeyi türkçeden ingilizceye çevirir.",
-		usage: "çeviri <mesaj>",
+		usage: "çeviri <mesaj>"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addStringOption(option => option.setName("mesaj").setDescription("Çeviriceğiniz mesaj").setRequired(true)),
@@ -40,7 +40,7 @@ const ceviri: DiscordCommand = {
 				console.error(err);
 				return message.reply({ content: `${emojis.error} ${unicode.bullet} Bir hata oluştu!\n\`\`\`js\n${err.toString()}\`\`\``, ephemeral: true });
 			});
-	},
+	}
 };
 
 export default ceviri;

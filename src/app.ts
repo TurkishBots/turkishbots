@@ -15,7 +15,7 @@ import AntiSpam from "discord-anti-spam";
 import { GiveawaysManager } from "discord-giveaways";
 const client = new Client({
 	partials: ["CHANNEL"],
-	intents: [Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_WEBHOOKS, Intents.FLAGS.GUILD_PRESENCES],
+	intents: [Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_WEBHOOKS, Intents.FLAGS.GUILD_PRESENCES]
 });
 client.config = config;
 const { prefix, token, webhooks } = config;
@@ -50,7 +50,7 @@ const antiSpam = new AntiSpam({
 	ignoreBots: true,
 	verbose: true,
 	unMuteTime: 10,
-	removeMessages: false,
+	removeMessages: false
 });
 client.antiSpam = antiSpam;
 //! Giveways
@@ -60,8 +60,8 @@ client.giveawaysManager = new GiveawaysManager(client, {
 		botsCanWin: false,
 		embedColor: "#FF0000",
 		embedColorEnd: "#000000",
-		reaction: "🎉",
-	},
+		reaction: "🎉"
+	}
 });
 client.giveawaysManager["messages"] = {
 	raw: {
@@ -75,12 +75,12 @@ client.giveawaysManager["messages"] = {
 		noWinner: "Çekiliş iptal edildi, geçerli katılımcı yok.",
 		hostedBy: "Sahip: {this.hostedBy}",
 		winners: "{this.winnerCount > 1 ? 'Kazananlar' : 'Kazanan'}:",
-		endedAt: "Sona erme tarihi",
+		endedAt: "Sona erme tarihi"
 	},
 	reroll: {
 		congrat: "🎉 Yeni {this.winnerCount > 1 ? 'kazananlar' : 'kazanan'}: {winners}! Tebrikler, **{this.prize}** kazandınız!",
-		error: "Geçerli katılımcı yok, yeni {this.winnerCount > 1 ? 'kazananlar' : 'kazanan'} seçilemez!",
-	},
+		error: "Geçerli katılımcı yok, yeni {this.winnerCount > 1 ? 'kazananlar' : 'kazanan'} seçilemez!"
+	}
 };
 //! WebHook
 const BotLog = new WebhookClient({ id: webhooks.log.id, token: webhooks.log.token });
@@ -130,7 +130,7 @@ client.reload = {
 			} catch (e) {
 				reject(e);
 			}
-		}),
+		})
 };
 client.load = {
 	command: (command: string) =>
@@ -143,7 +143,7 @@ client.load = {
 			} catch (e) {
 				reject(e);
 			}
-		}),
+		})
 };
 client.unload = {
 	command: (command: string) =>
@@ -156,7 +156,7 @@ client.unload = {
 			} catch (e) {
 				reject(e);
 			}
-		}),
+		})
 };
 //? End
 
@@ -211,7 +211,7 @@ client.on("messageCreate", async message => {
 		client.users.cache
 			.find(u => u.id === user.id)
 			.send({ embeds: [embed] })
-			.catch();
+			.catch(() => {});
 	}
 	if (db.exists(`afks_${message.author.id}`) && db.get(`afks_${message.author.id}`).time + 100 < Date.now()) {
 		db.delete(`afks_${message.author.id}`);

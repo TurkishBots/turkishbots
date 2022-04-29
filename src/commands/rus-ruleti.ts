@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { User } from "discord.js";
+import { User, Permissions } from "discord.js";
 import { DiscordCommand } from "../types";
 import { sleep } from "../util/Functions";
 const { randomRange } = require("../util/Util").default;
@@ -7,20 +7,20 @@ const { randomRange } = require("../util/Util").default;
 const rusRuleti: DiscordCommand = {
 	conf: {
 		aliases: ["rusruleti"],
-		permLevel: 0,
-		category: "Eğlence",
+		permLevel: Permissions.DEFAULT,
+		category: "Eğlence"
 	},
 
 	help: {
 		name: "rus-ruleti",
 		description: "Rus ruleti oynarsınız.",
-		usage: "rus-ruleti [@kullanıcı]",
+		usage: "rus-ruleti [@kullanıcı]"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addUserOption(option => option.setName("kullanıcı").setDescription("Ruleti oynanacak kullanıcı").setRequired(false)),
 
 	async execute({ message, args, emojis, unicode, isSlash }) {
-		let opponent = isSlash ? args[0]?.["value"] : args[0];
+		const opponent = isSlash ? args[0]?.["value"] : args[0];
 		if (opponent) if (opponent.id === message.author.id) return message.reply(`${emojis.error} ${unicode.bullet} Kendin ile oynayamazsın!`);
 		let isBot = false;
 		if (!opponent) isBot = true;
@@ -61,7 +61,7 @@ const rusRuleti: DiscordCommand = {
 		}
 		await sleep(2000);
 		msg.edit(`🔫 Kazanan : **${winner}**!`);
-	},
+	}
 };
 
 export default rusRuleti;

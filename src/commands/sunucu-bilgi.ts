@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { MessageEmbed, Permissions } from "discord.js";
 import { DiscordCommand } from "../types";
 
 const formatDate = (date: string | number | Date) => {
@@ -11,15 +11,15 @@ const formatDate = (date: string | number | Date) => {
 const sunucuBilgi: DiscordCommand = {
 	conf: {
 		aliases: ["sunucu", "sunucubilgi", "sbilgi"],
-		permLevel: 0,
+		permLevel: Permissions.DEFAULT,
 		category: "Genel",
-		guildOnly: true,
+		guildOnly: true
 	},
 
 	help: {
 		name: "sunucu-bilgi",
 		description: "Sunucu hakkında bilgi verir.",
-		usage: "sunucubilgi",
+		usage: "sunucubilgi"
 	},
 
 	slashCommand: () => new SlashCommandBuilder(),
@@ -54,7 +54,7 @@ const sunucuBilgi: DiscordCommand = {
 			.addField("Sunucu Duyuru Kanalı", guild.publicUpdatesChannelId ? `<#${guild.publicUpdatesChannelId}>` : "Yok", true)
 			.addField("Sunucu Sahibi", `<@!${guild.ownerId}>`, true);
 		message.reply({ embeds: [embed], ephemeral: true });
-	},
+	}
 };
 
 export default sunucuBilgi;

@@ -5,15 +5,15 @@ import { DiscordCommand } from "../types";
 const kick: DiscordCommand = {
 	conf: {
 		aliases: ["at", "sunucudanat", "sunucudan-at", "kickle"],
-		permLevel: "KICK_MEMBERS",
+		permLevel: Permissions.FLAGS.KICK_MEMBERS,
 		category: "Moderasyon",
-		guildOnly: true,
+		guildOnly: true
 	},
 
 	help: {
 		name: "kick",
 		description: "İstediğiniz kullanıcı sunucudan atar.",
-		usage: "kick <@kullanıcı> [atılma-sebebi]",
+		usage: "kick <@kullanıcı> [atılma-sebebi]"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addUserOption(option => option.setName("kullanıcı").setDescription("Sunucudan atılıcak kullanıcı").setRequired(true)).addStringOption(option => option.setName("sebep").setDescription("Atılma sebebi").setRequired(false)),
@@ -47,7 +47,7 @@ const kick: DiscordCommand = {
 			embed.setThumbnail("https://icon-library.com/images/kicking-icon/kicking-icon-28.jpg");
 			message.reply({ embeds: [embed] });
 		}
-	},
+	}
 };
 
 export default kick;

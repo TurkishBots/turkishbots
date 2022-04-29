@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { DiscordCommand } from "../types";
-import { MessageEmbed, version as dcversion } from "discord.js";
+import { MessageEmbed, version as dcversion, Permissions } from "discord.js";
 import moment from "moment";
 import "moment-duration-format";
 import os from "os";
@@ -9,14 +9,14 @@ const { version } = require("../../package.json");
 const istatislik: DiscordCommand = {
 	conf: {
 		aliases: ["i", "botistatislik", "botistatislikleri", "bot-istatislik", "bot-istatislikleri", "istatislikler"],
-		permLevel: 0,
-		category: "Genel",
+		permLevel: Permissions.DEFAULT,
+		category: "Genel"
 	},
 
 	help: {
 		name: "istatislik",
 		description: "Botun istatisliklerini gösterir.",
-		usage: "istatislik",
+		usage: "istatislik"
 	},
 
 	slashCommand: () => new SlashCommandBuilder(),
@@ -38,7 +38,7 @@ const istatislik: DiscordCommand = {
 			.setColor("RANDOM")
 			.setTimestamp()
 			.setFooter({ text: `Yusuf © ${new Date().getFullYear()} ${client.user.username}`, iconURL: client.user.avatarURL() })
-			.addField("» :crown: **Botun Kurucusu**", "<@!530043492014096384>", true)
+			.addField("» :crown: **Botun Programcısı**", "<@!530043492014096384>", true)
 			.addField("» :stopwatch: **Gecikme Süreleri**", `Mesaj Gecikmesi: ${ping}ms (${getStatus(ping)})\nSocket Gecikmesi: ${client.ws.ping}ms (${getStatus(client.ws.ping)})`, true)
 			.addField("» :electric_plug: **Bellek Kullanımı**", (process.memoryUsage().heapUsed / 1024 / 512).toFixed(2) + " MB", true)
 			// @ts-ignore
@@ -54,7 +54,7 @@ const istatislik: DiscordCommand = {
 			.addField("» **CPU**", `\`\`\`md\n${os.cpus().map(i => i.model)[0]}\`\`\``, true)
 			.addField("» **İşletim Sistemi**", `\`\`${os.platform()}\`\``, true);
 		message.reply({ embeds: [embed], ephemeral: true });
-	},
+	}
 };
 
 export default istatislik;

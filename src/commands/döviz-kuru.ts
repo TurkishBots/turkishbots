@@ -1,19 +1,19 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { MessageEmbed, Permissions } from "discord.js";
 import axios from "axios";
 import { DiscordCommand } from "../types";
 
 const dovizKuru: DiscordCommand = {
 	conf: {
 		aliases: ["döviz"],
-		permLevel: 0,
-		category: "Genel",
+		permLevel: Permissions.DEFAULT,
+		category: "Genel"
 	},
 
 	help: {
 		name: "döviz-kuru",
 		description: "Döviz kurlarını gösterir.",
-		usage: "döviz-kuru",
+		usage: "döviz-kuru"
 	},
 
 	slashCommand: () => new SlashCommandBuilder(),
@@ -55,7 +55,7 @@ const dovizKuru: DiscordCommand = {
 		fetchCurrency.delete();
 		fetchCrypto.delete();
 		message.reply({ embeds: [embed], ephemeral: true });
-	},
+	}
 };
 
 export default dovizKuru;

@@ -1,19 +1,19 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { MessageEmbed, Permissions } from "discord.js";
 import { DiscordCommand } from "../types";
 
 const duyuru: DiscordCommand = {
 	conf: {
 		aliases: ["duyuru-yap", "duyuruyap"],
-		permLevel: "MANAGE_MESSAGES",
+		permLevel: Permissions.FLAGS.MANAGE_MESSAGES,
 		category: "Moderasyon",
-		guildOnly: true,
+		guildOnly: true
 	},
 
 	help: {
 		name: "duyuru",
 		description: "Bulunduğunuz kanalda duyuru yapar.",
-		usage: "duyuru <başlık> <mesaj>",
+		usage: "duyuru <başlık> <mesaj>"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addStringOption(option => option.setName("başlık").setDescription("Duyuru başlığı").setRequired(true)).addStringOption(option => option.setName("mesaj").setDescription("Duyuru yazısı").setRequired(true)),
@@ -37,7 +37,7 @@ const duyuru: DiscordCommand = {
 		if (!isSlash) message.delete();
 		else message.reply({ content: `${emojis.success} ${unicode.bullet} Duyuru yapıldı.`, ephemeral: true });
 		message.channel.send({ embeds: [embed] });
-	},
+	}
 };
 
 export default duyuru;

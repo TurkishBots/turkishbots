@@ -1,5 +1,6 @@
 import { DiscordCommand } from "../types";
 import { SlashCommandBuilder } from "@discordjs/builders";
+import { Permissions } from "discord.js";
 import { stripIndents } from "common-tags";
 const { randomRange, verify } = require("../util/Util.js");
 
@@ -10,32 +11,32 @@ const gameConfig = {
 		shield: 60,
 		max: 100,
 		critical: 50,
-		min: 10,
+		min: 10
 	},
 	ultraDamage: {
 		shield: 150,
 		max: 250,
-		min: 100,
+		min: 100
 	},
 	bandage: {
 		max: 75,
-		min: 20,
+		min: 20
 	},
-	choices: ["saldır", "savun", "omnitrix", "bandaj", "kaç"],
+	choices: ["saldır", "savun", "omnitrix", "bandaj", "kaç"]
 };
 
 const duello: DiscordCommand = {
 	conf: {
 		aliases: ["1vs1", "1v1", "savaş", "vs", "pvp"],
-		permLevel: 0,
+		permLevel: Permissions.DEFAULT,
 		category: "Eğlence",
-		guildOnly: true,
+		guildOnly: true
 	},
 
 	help: {
 		name: "düello",
 		description: "İstediğiniz bir kişi ile düello atarsınız!",
-		usage: "düello <@kullanıcı>",
+		usage: "düello <@kullanıcı>"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addUserOption(option => option.setDescription("Düelloya davet ediceğiniz kullanıcı").setName("rakip").setRequired(true)),
@@ -154,7 +155,7 @@ const duello: DiscordCommand = {
 			message[isSlash ? "followUp" : "reply"](`${emojis.error} Bir hata oluştu!\n\`\`\`js\n${err.toString()}\`\`\``);
 			throw err;
 		}
-	},
+	}
 };
 
 export default duello;

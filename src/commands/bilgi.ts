@@ -1,19 +1,19 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { MessageEmbed, Permissions } from "discord.js";
 import { DiscordCommand } from "../types";
 const { version } = require("../../package.json");
 
 const bilgi: DiscordCommand = {
 	conf: {
 		aliases: ["bot-bilgi"],
-		permLevel: 0,
-		category: "Genel",
+		permLevel: Permissions.DEFAULT,
+		category: "Genel"
 	},
 
 	help: {
 		name: "bilgi",
 		description: "Bot hakkında bilgi gösterir.",
-		usage: "bilgi",
+		usage: "bilgi"
 	},
 
 	slashCommand: () => new SlashCommandBuilder(),
@@ -39,7 +39,7 @@ const bilgi: DiscordCommand = {
 			`Bu bot Yusuf tarafından TurkishMethods için yapılmış bir projedir. 2020-2021 yıllarında başlanmış ama bazı aksaklıklardan dolayı köşeye atılmıştır. 2022 yılında tekrar hayata tutunmayı başarmıştır. Bot ${emojis.typescript} \`TypeScript\`, ${emojis.nodejs} \`NodeJS\`, ${emojis.discordjs} \`Discord.JS\` ve daha birçok dil/paket kullanılarak yapılmıştır. Kodlayan Yusuf'a sonsuz teşekkürler.`
 		);
 		message.reply({ embeds: [embed], ephemeral: true });
-	},
+	}
 };
 
 export default bilgi;

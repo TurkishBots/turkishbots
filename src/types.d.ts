@@ -4,7 +4,7 @@ import { Client, Message } from "discord.js";
 export declare interface DiscordCommand {
 	conf: {
 		aliases: string[];
-		permLevel: number | string;
+		permLevel: bigint | string;
 		category: string;
 		guildOnly?: boolean;
 		disabled?: boolean;

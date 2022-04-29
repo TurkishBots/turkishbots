@@ -1,19 +1,19 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { MessageEmbed, Permissions } from "discord.js";
 import { DiscordCommand } from "../types";
 
 const oylama: DiscordCommand = {
 	conf: {
 		aliases: ["oylama-yap"],
-		permLevel: "MANAGE_MESSAGES",
+		permLevel: Permissions.FLAGS.MANAGE_MESSAGES,
 		category: "Moderasyon",
-		guildOnly: true,
+		guildOnly: true
 	},
 
 	help: {
 		name: "oylama",
 		description: "Oylama yaparsınız.",
-		usage: "oylama <mesaj>",
+		usage: "oylama <mesaj>"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addStringOption(option => option.setDescription("Oylama Mesajı").setName("mesaj").setRequired(true)),
@@ -34,7 +34,7 @@ const oylama: DiscordCommand = {
 		const msg = await message.channel.send({ embeds: [embed] });
 		await msg.react(emojis.plus_1);
 		await msg.react(emojis.minus_1);
-	},
+	}
 };
 
 export default oylama;

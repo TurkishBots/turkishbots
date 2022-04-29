@@ -5,16 +5,16 @@ export = (client: Client) => {
 	const activities = [
 		{
 			name: `www.turkishmethods.com`,
-			type: "WATCHING",
+			type: "WATCHING"
 		},
 		{
 			name: `TurkishMethods`,
-			type: "WATCHING",
+			type: "WATCHING"
 		},
 		{
 			name: `${client.config.prefix}yardım`,
-			type: "LISTENING",
-		},
+			type: "LISTENING"
+		}
 	];
 
 	const firstAct = Math.floor(Math.random() * activities.length);

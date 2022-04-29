@@ -12,4 +12,4 @@ export const getClosest = (haystack: string[], needle: string) => {
 	}, "");
 };
 
-export const sleep = (ms: number): Promise<void> => new Promise<void>(r => setTimeout(r, ms));
+export const sleep = (ms: number): Promise<void> => new Promise<void>(resolve => setTimeout(resolve, ms));

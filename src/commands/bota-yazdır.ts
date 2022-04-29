@@ -5,13 +5,13 @@ const botaYazdir: DiscordCommand = {
 	conf: {
 		aliases: ["botyaz", "botayazdır"],
 		permLevel: "OWNER",
-		category: "Admin",
+		category: "Admin"
 	},
 
 	help: {
 		name: "bota-yazdır",
 		description: "Bota mesaj yazdırmanızı sağlar.",
-		usage: "bota-yazdır <mesaj>",
+		usage: "bota-yazdır <mesaj>"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addStringOption(option => option.setDescription("Bota yazdıracağınız mesaj").setName("mesaj").setRequired(true)),
@@ -22,7 +22,7 @@ const botaYazdir: DiscordCommand = {
 		if (!isSlash) message.delete();
 		else message.reply({ content: `${emojis.success} ${unicode.bullet} Mesaj başarıyla gönderildi!`, ephemeral: true });
 		message.channel.send(args.join(" ").trim());
-	},
+	}
 };
 
 export default botaYazdir;

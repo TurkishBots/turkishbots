@@ -21,12 +21,12 @@ export = (client: Client) => {
 							track_id: spotify.syncId,
 							timestamps: {
 								start: spotify.timestamps.start,
-								end: spotify.timestamps.end,
+								end: spotify.timestamps.end
 							},
 							song: spotify.details,
 							artist: spotify.state,
 							album_art_url: `https://i.scdn.co/image/${spotify.assets.largeImage.split(":").pop()}`,
-							album: spotify.assets.largeText,
+							album: spotify.assets.largeText
 					  }
 					: null,
 				discord_user: {
@@ -34,13 +34,13 @@ export = (client: Client) => {
 					public_flags: user.flags.bitfield,
 					id: user.id,
 					discriminator: user.discriminator,
-					avatar: user.avatar,
+					avatar: user.avatar
 				},
 				activities:
 					member?.presence?.activities?.map?.(activity => ({
 						type: activity.type,
 						timestamps: {
-							start: new Date(activity.timestamps?.start).getTime(),
+							start: new Date(activity.timestamps?.start).getTime()
 						},
 						sync_id: activity.syncId,
 						state: activity.state,
@@ -53,15 +53,15 @@ export = (client: Client) => {
 							small_text: activity?.assets?.smallText ?? null,
 							small_image: activity?.assets?.smallImage ?? null,
 							large_text: activity?.assets?.largeText ?? null,
-							large_image: activity?.assets?.largeImage ?? null,
+							large_image: activity?.assets?.largeImage ?? null
 						},
-						application_id: activity.applicationId,
+						application_id: activity.applicationId
 					})) ?? [],
 				discord_status: member?.presence?.status ?? "offline",
 				active_on_discord_web: member?.presence?.clientStatus?.web ?? false,
 				active_on_discord_mobile: member?.presence?.clientStatus?.mobile ?? false,
-				active_on_discord_desktop: member?.presence?.clientStatus?.desktop ?? false,
-			},
+				active_on_discord_desktop: member?.presence?.clientStatus?.desktop ?? false
+			}
 		});
 	});
 

@@ -1,19 +1,19 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageAttachment } from "discord.js";
+import { MessageAttachment, Permissions } from "discord.js";
 import { DiscordCommand } from "../types";
 import Jimp from "jimp";
 
 const wasted: DiscordCommand = {
 	conf: {
 		aliases: [],
-		permLevel: 0,
-		category: "Eğlence",
+		permLevel: Permissions.DEFAULT,
+		category: "Eğlence"
 	},
 
 	help: {
 		name: "wasted",
 		description: "Profil fotorafınıza wasted efekti ekler.",
-		usage: "wasted [@kullanıcı]",
+		usage: "wasted [@kullanıcı]"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addUserOption(option => option.setName("kullanıcı").setDescription("Kullanıcı").setRequired(false)),
@@ -32,7 +32,7 @@ const wasted: DiscordCommand = {
 					message.reply({ files: [new MessageAttachment(buffer)], ephemeral: true });
 				})
 		);
-	},
+	}
 };
 
 export default wasted;

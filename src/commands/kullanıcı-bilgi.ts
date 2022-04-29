@@ -1,19 +1,19 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { MessageEmbed, Permissions } from "discord.js";
 import { DiscordCommand } from "../types";
 
 const kullaniciBilgi: DiscordCommand = {
 	conf: {
 		aliases: ["kullanıcıbilgi", "user", "kullanıcı"],
-		permLevel: 0,
+		permLevel: Permissions.DEFAULT,
 		category: "Genel",
-		guildOnly: true,
+		guildOnly: true
 	},
 
 	help: {
 		name: "kullanıcı-bilgi",
 		description: "Etiketlediğiniz kullanıcı hakkında bilgi verir.",
-		usage: "kullanıcı-bilgi <@kullanıcı>",
+		usage: "kullanıcı-bilgi <@kullanıcı>"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addUserOption(option => option.setDescription("Kullanıcı").setName("kullanıcı").setRequired(true)),
@@ -42,7 +42,7 @@ const kullaniciBilgi: DiscordCommand = {
 			.addField("Discord Kayıt Tarihi :", `**<t:${Date.parse(member.user.createdAt.toLocaleString()) / 1000}:R>**`, true)
 			.addField("Sunucuya Giriş Tarihi :", `**<t:${Date.parse(member.joinedAt.toLocaleString()) / 1000}:R>**`, true);
 		message.reply({ embeds: [embed], ephemeral: true });
-	},
+	}
 };
 
 export default kullaniciBilgi;

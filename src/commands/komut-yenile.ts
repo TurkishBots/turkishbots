@@ -5,13 +5,13 @@ const komutYenile: DiscordCommand = {
 	conf: {
 		aliases: ["komutyenile", "komutuyenile", "reload-command"],
 		permLevel: "OWNER",
-		category: "Admin",
+		category: "Admin"
 	},
 
 	help: {
 		name: "komut-yenile",
 		description: "Belirttiğiniz komutu yeniden başlatır.",
-		usage: "komut-yenile <komut>",
+		usage: "komut-yenile <komut>"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addStringOption(option => option.setName("komut").setDescription("Yenilenecek komut").setRequired(true)),
@@ -31,7 +31,7 @@ const komutYenile: DiscordCommand = {
 			console.error(e);
 			return message.reply({ content: `${emojis.error} ${unicode.bullet} Komut yeniden yüklenemedi! \`${command}\`\n\`\`\`js\n${e}\`\`\``, ephemeral: true });
 		}
-	},
+	}
 };
 
 export default komutYenile;

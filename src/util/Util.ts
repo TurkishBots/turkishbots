@@ -7,7 +7,7 @@ const no = ["hayır", "hyr", "yo", "no"];
 
 export default class Util {
 	static wait(ms: number) {
-		return new Promise(r => setTimeout(r, ms));
+		return new Promise(resolve => setTimeout(resolve, ms));
 	}
 
 	static shuffle(array: any) {

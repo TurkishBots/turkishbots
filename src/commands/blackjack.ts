@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { Message, MessageEmbed, MessageReaction, User } from "discord.js";
+import { Message, MessageEmbed, MessageReaction, User, Permissions } from "discord.js";
 import { DiscordCommand } from "../types";
 
 const hitEmoji = "👊";
@@ -13,14 +13,14 @@ interface Card {
 const blackjack: DiscordCommand = {
 	conf: {
 		aliases: ["bj", "21"],
-		permLevel: 0,
-		category: "Eğlence",
+		permLevel: Permissions.DEFAULT,
+		category: "Eğlence"
 	},
 
 	help: {
 		name: "blackjack",
 		description: "Blackjack oynarsınız.",
-		usage: "blackjack",
+		usage: "blackjack"
 	},
 
 	slashCommand: () => new SlashCommandBuilder(),
@@ -30,7 +30,7 @@ const blackjack: DiscordCommand = {
 		const playerCards: Card[] = [];
 		const embed = new MessageEmbed();
 		await startGame(message, embed, dealerCards, playerCards);
-	},
+	}
 };
 
 async function startGame(message: Message, embed: MessageEmbed, dealerCards: Card[], playerCards: Card[]) {
@@ -65,56 +65,56 @@ function getRandomCard(): Card {
 	const cards = [
 		{
 			name: "A",
-			value: 11,
+			value: 11
 		},
 		{
 			name: "2",
-			value: 2,
+			value: 2
 		},
 		{
 			name: "3",
-			value: 3,
+			value: 3
 		},
 		{
 			name: "4",
-			value: 4,
+			value: 4
 		},
 		{
 			name: "5",
-			value: 5,
+			value: 5
 		},
 		{
 			name: "6",
-			value: 6,
+			value: 6
 		},
 		{
 			name: "7",
-			value: 7,
+			value: 7
 		},
 		{
 			name: "8",
-			value: 8,
+			value: 8
 		},
 		{
 			name: "9",
-			value: 9,
+			value: 9
 		},
 		{
 			name: "10",
-			value: 10,
+			value: 10
 		},
 		{
 			name: "J",
-			value: 10,
+			value: 10
 		},
 		{
 			name: "Q",
-			value: 10,
+			value: 10
 		},
 		{
 			name: "K",
-			value: 10,
-		},
+			value: 10
+		}
 	];
 	const randomCard = cards[Math.floor(Math.random() * cards.length)];
 	return randomCard;

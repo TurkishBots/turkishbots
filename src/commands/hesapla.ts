@@ -1,19 +1,19 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { MessageEmbed, Permissions } from "discord.js";
 import { DiscordCommand } from "../types";
 import math from "math-expression-evaluator";
 
 const hesapla: DiscordCommand = {
 	conf: {
 		aliases: ["hesapmakinesi", "hesapyap", "hesap-makinesi", "hesap-yap"],
-		permLevel: 0,
-		category: "Genel",
+		permLevel: Permissions.DEFAULT,
+		category: "Genel"
 	},
 
 	help: {
 		name: "hesapla",
 		description: "Belirttiğiniz matematik işlemlerini yapar.",
-		usage: "hesapla <işlem>",
+		usage: "hesapla <işlem>"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addStringOption(option => option.setDescription("Hesaplanacak işlem").setName("islem").setRequired(true)),
@@ -36,7 +36,7 @@ const hesapla: DiscordCommand = {
 		embed.setColor("RANDOM");
 		if (!isSlash) embed.setFooter({ text: `${message.author.tag} Tarafından kullanıldı`, iconURL: message.author.avatarURL() });
 		message.reply({ embeds: [embed], ephemeral: true });
-	},
+	}
 };
 
 export default hesapla;

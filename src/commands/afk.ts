@@ -1,20 +1,20 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { MessageEmbed, Permissions } from "discord.js";
 import { DiscordCommand } from "../types";
 const db = require("../components/database")();
 
 const afk: DiscordCommand = {
 	conf: {
 		aliases: ["afkol", "awayfromkeyboard", "afk-ol", "klavyedenuzakta", "klavyedenuzakta-ol"],
-		permLevel: 0,
+		permLevel: Permissions.DEFAULT,
 		category: "Genel",
-		guildOnly: true,
+		guildOnly: true
 	},
 
 	help: {
 		name: "afk",
 		description: "AFK olursunuz (Birisi sizi etiketlediğinde AFK olduğunuzu söyler).",
-		usage: "afk <afk-olma-nedeni>",
+		usage: "afk <afk-olma-nedeni>"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addStringOption(option => option.setDescription("Afk olma nedeni").setName("neden").setRequired(true)),
@@ -40,7 +40,7 @@ const afk: DiscordCommand = {
 			message.delete();
 			message.channel.send({ embeds: [msgEmbed] });
 		} else message.reply({ embeds: [msgEmbed] });
-	},
+	}
 };
 
 export default afk;

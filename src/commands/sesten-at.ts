@@ -5,15 +5,15 @@ import { DiscordCommand } from "../types";
 const sestenAt: DiscordCommand = {
 	conf: {
 		aliases: ["sestenat"],
-		permLevel: "MOVE_MEMBERS",
+		permLevel: Permissions.FLAGS.MOVE_MEMBERS,
 		category: "Moderasyon",
-		guildOnly: true,
+		guildOnly: true
 	},
 
 	help: {
 		name: "sesten-at",
 		description: "Kullanıcıyı sesten atar.",
-		usage: "sesten-at <kullanıcı>",
+		usage: "sesten-at <kullanıcı>"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addUserOption(option => option.setName("kullanıcı").setDescription("Atılcak kullanıcı").setRequired(true)),
@@ -27,7 +27,7 @@ const sestenAt: DiscordCommand = {
 		if (user.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || user.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) return message.reply({ content: `${emojis.error} ${unicode.bullet} Yöneticileri sesten atamazsın!`, ephemeral: true });
 		user.voice.disconnect(`${message.author.username} tarafından sesten atıldı.`);
 		message.reply({ content: `${emojis.success} ${unicode.bullet} ${user.user.username} adlı kullanıcı sesten atıldı!`, ephemeral: true });
-	},
+	}
 };
 
 export default sestenAt;

@@ -5,15 +5,15 @@ import { DiscordCommand } from "../types";
 const warn: DiscordCommand = {
 	conf: {
 		aliases: ["uyar"],
-		permLevel: "MODERATE_MEMBERS",
+		permLevel: Permissions.FLAGS.MODERATE_MEMBERS,
 		category: "Moderasyon",
-		guildOnly: true,
+		guildOnly: true
 	},
 
 	help: {
 		name: "warn",
 		description: "Bir kullanıcıyı uyarır.",
-		usage: "warn <@kullanıcı> <sebep>",
+		usage: "warn <@kullanıcı> <sebep>"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addUserOption(option => option.setDescription("Kullanıcı").setName("kullanıcı").setRequired(true)).addStringOption(option => option.setDescription("Sebep").setName("sebep").setRequired(true)),
@@ -44,7 +44,7 @@ const warn: DiscordCommand = {
 		if (warnCount + 1 >= 3) await member.kick(`Bu kullanıcı 3 uyarı aldığı için atıldı.`).catch(() => {});
 		else await member.roles.add(message.guild.roles.cache.find(r => r.name === `Uyarı ${warnCount + 1}`).id);
 		message.reply({ content: `${emojis.success} ${unicode.bullet} Kullanıcı uyarıldı. **(${warnCount + 1}/3)**`, ephemeral: true });
-	},
+	}
 };
 
 export default warn;

@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { MessageEmbed, Permissions } from "discord.js";
 import { DiscordCommand } from "../types";
 import categories from "../components/categories";
 import fs from "fs";
@@ -7,14 +7,14 @@ import fs from "fs";
 const help: DiscordCommand = {
 	conf: {
 		aliases: ["help", "cmds", "komutlar", "y"],
-		permLevel: 0,
-		category: "Genel",
+		permLevel: Permissions.DEFAULT,
+		category: "Genel"
 	},
 
 	help: {
 		name: "yardım",
 		description: "Komutlar hakkında bilgi verir.",
-		usage: "yardım [kategori] [komut]",
+		usage: "yardım [kategori] [komut]"
 	},
 
 	slashCommand: () =>
@@ -37,7 +37,7 @@ const help: DiscordCommand = {
 			links: "❯ Bağlantılar",
 			footer: `${message.author.tag} Tarafından istendi.`,
 			description: `**${prefix}$(cmd.help.name)** → $(cmd.help.description)`,
-			special_chars: `**[]** = Opsiyonel\n**<>** = Zorunlu`,
+			special_chars: `**[]** = Opsiyonel\n**<>** = Zorunlu`
 		};
 
 		if (isSlash && args[1]) return message.reply({ content: `${emojis.error} ${unicode.bullet} Hem kategori hemde komut seçemezsiniz!`, ephemeral: true });
@@ -109,7 +109,7 @@ const help: DiscordCommand = {
 			if (!isSlash) embed.setFooter({ text: `Bu komutu kullanan kullanıcı ${message.author.tag}`, iconURL: message.author.displayAvatarURL() });
 			message.reply({ embeds: [embed], ephemeral: true });
 		}
-	},
+	}
 };
 
 export default help;

@@ -1,19 +1,19 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
-import axios from "axios";
+import { MessageEmbed, Permissions } from "discord.js";
 import { DiscordCommand } from "../types";
+import axios from "axios";
 
 const linkKisalt: DiscordCommand = {
 	conf: {
 		aliases: ["linkkısalt", "url-kısalt", "urlkısalt"],
-		permLevel: 0,
-		category: "Genel",
+		permLevel: Permissions.DEFAULT,
+		category: "Genel"
 	},
 
 	help: {
 		name: "link-kısalt",
 		description: "Belirttiğiniz uzun linki kısaltır.",
-		usage: "link-kısalt <link>",
+		usage: "link-kısalt <link>"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addStringOption(option => option.setName("link").setDescription("Kısaltılacak link").setRequired(true)),
@@ -47,7 +47,7 @@ const linkKisalt: DiscordCommand = {
 		} catch (err) {
 			message.reply({ content: `${emojis.error} ${unicode.bullet} Bir hata oluştu!\n\`\`\`js\n${err}\`\`\``, ephemeral: true });
 		}
-	},
+	}
 };
 
 export default linkKisalt;

@@ -1,5 +1,6 @@
 import { DiscordCommand } from "../types";
 import { SlashCommandBuilder } from "@discordjs/builders";
+import { Permissions } from "discord.js";
 import figlet from "figlet";
 
 const limit = 50;
@@ -7,14 +8,14 @@ const limit = 50;
 const ascii: DiscordCommand = {
 	conf: {
 		aliases: [],
-		permLevel: 0,
-		category: "Eğlence",
+		permLevel: Permissions.DEFAULT,
+		category: "Eğlence"
 	},
 
 	help: {
 		name: "ascii",
 		description: "Ascii şeklinde yazı yazmanızı sağlar.",
-		usage: "ascii <mesaj>",
+		usage: "ascii <mesaj>"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addStringOption(option => option.setDescription("Ascii halinde yazılıcak mesaj").setName("mesaj").setRequired(true)),
@@ -28,7 +29,7 @@ const ascii: DiscordCommand = {
 			if (err) throw err;
 			message.reply({ content: "```\n" + data + "```", ephemeral: true });
 		});
-	},
+	}
 };
 
 export default ascii;

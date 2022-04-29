@@ -1,19 +1,20 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { stripIndents } from "common-tags";
 import { DiscordCommand } from "../types";
+import { Permissions } from "discord.js";
 const fruits = ["🍇", "🍊", "🍐", "🍒", "🍋"];
 
 const slots: DiscordCommand = {
 	conf: {
 		aliases: [],
-		permLevel: 0,
-		category: "Eğlence",
+		permLevel: Permissions.DEFAULT,
+		category: "Eğlence"
 	},
 
 	help: {
 		name: "slots",
 		description: "Slots oyununu oynarsınız.",
-		usage: "slots",
+		usage: "slots"
 	},
 
 	slashCommand: () => new SlashCommandBuilder(),
@@ -29,7 +30,7 @@ const slots: DiscordCommand = {
             ${slot1} : ${slot2} : ${slot3}
             Tebrikler, kazandınız!
             `,
-				ephemeral: true,
+				ephemeral: true
 			});
 		} else {
 			message.reply({
@@ -37,10 +38,10 @@ const slots: DiscordCommand = {
             ${slot1} : ${slot2} : ${slot3}
             Eyvah, kaybettin!
             `,
-				ephemeral: true,
+				ephemeral: true
 			});
 		}
-	},
+	}
 };
 
 export default slots;

@@ -10,7 +10,7 @@ const formatTime = (time: string | number) => {
 	return time.slice(0, 1) + "." + time.slice(1, 3);
 };
 
-const formatPerm = (perm: string | number | bigint) => {
+const formatPerm = (perm: string | bigint) => {
 	const perms = new Permissions(typeof perm === "string" ? Permissions.FLAGS[perm] : perm);
 	if (perms.has("ADMINISTRATOR")) return "Yönetici";
 	if (perms.has("MANAGE_GUILD")) return "Sunucuyu Yönet";
@@ -57,8 +57,8 @@ export default (message: Message) => {
 	}
 	if (cmd.conf.guildOnly && (message.channel.type === "DM" || !message.guild)) return message.reply(`${config.emojis.error} ${unicodechars.bullet} Bu komutu sadece sunucu içinde kullanabilirsin!`).then(m => setTimeout(() => m?.delete?.(), config.deleteInterval));
 
-	const hasPerm = (permLevel: any, message: Message): boolean => {
-		if (config.owners.includes(message.author.id) || !permLevel || message.member.permissions.has(Permissions.FLAGS[permLevel])) return true;
+	const hasPerm = (permLevel: bigint | string, message: Message): boolean => {
+		if (config.owners.includes(message.author.id) || permLevel === Permissions.DEFAULT || (typeof permLevel === "bigint" && message.member.permissions.has(permLevel))) return true;
 		else return false;
 	};
 

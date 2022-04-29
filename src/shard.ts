@@ -18,7 +18,7 @@ sLog(chalk.greenBright("Başlatılıyor..."));
 const manager = new ShardingManager(startFile, {
 	totalShards: "auto",
 	token,
-	respawn: true,
+	respawn: true
 });
 
 manager.on("shardCreate", shard => {

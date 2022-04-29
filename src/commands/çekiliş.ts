@@ -1,20 +1,20 @@
 // const { SlashCommandBuilder } = require("@discordjs/builders");
-import { TextChannel } from "discord.js";
+import { TextChannel, Permissions } from "discord.js";
 import ms from "ms";
 import { DiscordCommand } from "../types";
 
 const cekilis: DiscordCommand = {
 	conf: {
 		aliases: ["çekiliş-yap", "çekilişyap"],
-		permLevel: "MANAGE_GUILD",
+		permLevel: Permissions.DEFAULT,
 		category: "Moderasyon",
-		guildOnly: true,
+		guildOnly: true
 	},
 
 	help: {
 		name: "çekiliş",
 		description: "Sunucuda çekiliş yaparsınız.",
-		usage: "çekiliş <zaman|reroll|delete|end> <adet|mesaj_id> <ödül>",
+		usage: "çekiliş <zaman|reroll|delete|end> <adet|mesaj_id> <ödül>"
 	},
 
 	// slashCommand: () => new SlashCommandBuilder(),
@@ -63,7 +63,7 @@ const cekilis: DiscordCommand = {
 			message.reply(`${emojis.error} ${unicode.bullet} Bir hata oluştu!\n\`\`\`js\n${err}\`\`\``);
 			console.error(err);
 		}
-	},
+	}
 };
 
 export default cekilis;

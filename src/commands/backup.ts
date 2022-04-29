@@ -25,13 +25,13 @@ const backup: DiscordCommand = {
 	conf: {
 		aliases: ["yedekle", "yedek-al", "yedekal", "backup-al", "backupal"],
 		permLevel: "GAMER",
-		category: "Admin",
+		category: "Admin"
 	},
 
 	help: {
 		name: "backup",
 		description: "Botun bir yedeğini alır.",
-		usage: "backup",
+		usage: "backup"
 	},
 
 	slashCommand: () => new SlashCommandBuilder(),
@@ -57,7 +57,7 @@ const backup: DiscordCommand = {
 			return backupMsgFirst.reply(`${emojis.error} ${unicode.bullet} Yedekleme sırasında bir hata oluştu.\n\`\`\`js\n${err}\`\`\``);
 		}
 		backupMsgFirst.reply(`${emojis.success} ${unicode.bullet} Yedekleme başarıyla tamamlandı.\n${emojis.info} ${unicode.bullet} Yedekleme dosyası **${path.join("backups", `backup_${parseDate()}.zip`)}** olarak kaydedildi.`);
-	},
+	}
 };
 
 export default backup;

@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { MessageEmbed, Permissions } from "discord.js";
 import ms from "ms";
 import { DiscordCommand } from "../types";
 
@@ -8,14 +8,14 @@ const formatTime = (time: string) => time.replaceAll("saniye", "second").replace
 const hatirlatici: DiscordCommand = {
 	conf: {
 		aliases: [],
-		permLevel: 0,
-		category: "Genel",
+		permLevel: Permissions.DEFAULT,
+		category: "Genel"
 	},
 
 	help: {
 		name: "hatırlatıcı",
 		description: "Belirttiğiniz zaman içerisinde size belirttiğiniz mesajı yollar.",
-		usage: "hatırlatıcı <zaman> <mesaj>",
+		usage: "hatırlatıcı <zaman> <mesaj>"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addStringOption(option => option.setName("zaman").setDescription("Hatırlatılıcak zaman").setRequired(true)).addStringOption(option => option.setName("mesaj").setDescription("Hatırlatılıcak mesaj").setRequired(true)),
@@ -39,7 +39,7 @@ const hatirlatici: DiscordCommand = {
 			.setURL(`https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id}`)
 			.setTitle("Hatırlatıcı");
 		setTimeout(() => message.author.send({ embeds: [embed] }).catch(() => {}), ms(formatTime(time)));
-	},
+	}
 };
 
 export default hatirlatici;

@@ -1,20 +1,20 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { MessageEmbed, Permissions } from "discord.js";
 import { DiscordCommand } from "../types";
 import axios from "axios";
 
 const kodCalistir: DiscordCommand = {
 	conf: {
 		aliases: ["kodçalıştır"],
-		permLevel: 0,
+		permLevel: Permissions.DEFAULT,
 		category: "Genel",
-		guildOnly: false,
+		guildOnly: false
 	},
 
 	help: {
 		name: "kod-çalıştır",
 		description: "NodeJS dilinde bir kod çalıştırır.",
-		usage: "kod-çalıştır <kod>",
+		usage: "kod-çalıştır <kod>"
 	},
 
 	slashCommand: () => new SlashCommandBuilder().addStringOption(option => option.setName("kod").setDescription("Çalıştırılacak kod").setRequired(true)),
@@ -34,15 +34,20 @@ const kodCalistir: DiscordCommand = {
 		const res = req.data.split("\n").map((s: any) => s && JSON.parse(s));
 		const err = res.find((r: any) => r.type === "StdErr")?.data;
 		const out = res.find((r: any) => r.type === "StdOut")?.data;
-		if (!isSlash) await message.reactions.cache.get(emojis.compile_dots.match(/<a?:.*:(.*?)>/)[1]).remove();
+		if (!isSlash) {
+			await message.reactions.cache
+				.get(emojis.compile_dots.match(/<a?:.*:(.*?)>/)[1])
+				.remove()
+				.catch(() => {});
+		}
 		const embed = new MessageEmbed()
 			.setColor(err ? "RED" : "BLUE")
 			.setTitle(!err && !out ? "Çalıştırma başarılı" : "Program Çıktısı")
 			.setDescription(out || err ? `\`\`\`js\n${(out || err).slice(0, 250)}\`\`\`` : "Çıktı yok.")
 			.setFooter({ text: `${message.author.tag} | wandbox.org` });
-		const msg = await message.reply({ embeds: [embed], ephemeral: true }).catch();
-		if (!isSlash) msg.react(err ? emojis.error : emojis.success).catch(() => {});
-	},
+		const msg = await message.reply({ embeds: [embed], ephemeral: true }).catch(() => {});
+		if (msg && !isSlash) msg.react(err ? emojis.error : emojis.success).catch(() => {});
+	}
 };
 
 export default kodCalistir;
