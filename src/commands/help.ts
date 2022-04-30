@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { MessageEmbed, Permissions } from "discord.js";
 import { DiscordCommand } from "../types";
 import categories from "../components/categories";
-import fs from "fs";
+import fs from "node:fs";
 
 const help: DiscordCommand = {
 	conf: {
@@ -23,8 +23,7 @@ const help: DiscordCommand = {
 				option
 					.setName("kategori")
 					.setDescription("Kategori hakkında bilgi")
-					// @ts-ignore
-					.setChoices(categories.map(c => [c.name, c.name]))
+					.setChoices(...categories.map(c => ({ name: c.name, value: c.name })))
 					.setRequired(false)
 			)
 			.addStringOption(option => option.setName("komut").setDescription("Komut hakkında bilgi").setRequired(false)),

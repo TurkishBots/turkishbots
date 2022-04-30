@@ -16,18 +16,7 @@ const paraCevir: DiscordCommand = {
 		usage: "para-çevir [yazı|tura]"
 	},
 
-	slashCommand: () =>
-		new SlashCommandBuilder().addStringOption(option =>
-			option
-				.setName("yüzü")
-				.setDescription("Paranın yüzü (yazı/tura)")
-				// @ts-ignore
-				.setChoices([
-					["yazı", "yazı"],
-					["tura", "tura"]
-				])
-				.setRequired(false)
-		),
+	slashCommand: () => new SlashCommandBuilder().addStringOption(option => option.setName("yüzü").setDescription("Paranın yüzü (yazı/tura)").setChoices({ name: "Yazı", value: "yazı" }, { name: "Tura", value: "tura" }).setRequired(false)),
 
 	async execute({ message, args, isSlash }) {
 		const coinFace = ["yazı", "tura"].includes(isSlash ? args[0]?.["value"] : args[0]) ? (isSlash ? args[0]?.["value"] : args[0]) : "yazı";

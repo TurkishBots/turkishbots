@@ -16,14 +16,14 @@ console.clear();
 sLog(chalk.greenBright("Başlatılıyor..."));
 
 const manager = new ShardingManager(startFile, {
-	totalShards: "auto",
+	totalShards: 1,
 	token,
 	respawn: true
 });
 
 manager.on("shardCreate", shard => {
 	let slicer = "";
-	for (let i = 0; i < 50; i++) slicer += "\\_";
+	for (let i = 0; i <= 50; i++) slicer += "\\_";
 	webhookClient.send(`**${slicer}**`);
 	webhookClient.send("**[Shard]** Yükleme **başlatılıyor**.");
 	webhookClient.send(`**[Shard]** Yüklenen shard **${shard.id + 1}/${manager.totalShards}**.`);

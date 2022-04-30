@@ -3,8 +3,8 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { stripIndents } from "common-tags";
 import { TextChannel } from "discord.js";
 import AdmZip from "adm-zip";
-import path from "path";
-import fs from "fs";
+import path from "node:path";
+import fs from "node:fs";
 
 const zipper = new AdmZip();
 

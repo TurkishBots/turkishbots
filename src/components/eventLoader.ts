@@ -1,6 +1,6 @@
 import { Client } from "discord.js";
-import path from "path";
-import { readdir } from "fs";
+import path from "node:path";
+import { readdir } from "node:fs";
 
 const reqEvent = (event: string) => import(path.join(__dirname, "..", "events", event)).then(e => e.default);
 

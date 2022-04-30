@@ -1,18 +1,19 @@
-"use strict";
+//! Imports
 import { Client, Intents, MessageEmbed, WebhookClient, Collection, Permissions, TextChannel } from "discord.js";
 import config from "./config";
-import path from "path";
+import path from "node:path";
 import moment from "moment";
 import chalk from "chalk";
-import fs from "fs";
+import fs from "node:fs";
 //! Types
 import { JsonDatabase } from "wio.db";
 import { DiscordCommand } from "./types";
-//? End
+//? End Types
 import { REST } from "@discordjs/rest";
 import { Routes } from "discord-api-types/v9";
 import AntiSpam from "discord-anti-spam";
 import { GiveawaysManager } from "discord-giveaways";
+//? End Imports
 const client = new Client({
 	partials: ["CHANNEL"],
 	intents: [Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_WEBHOOKS, Intents.FLAGS.GUILD_PRESENCES]
@@ -101,15 +102,8 @@ fs.readdir(path.join(__dirname, "commands"), (err, files) => {
 		if (!props.help) return log(chalk.redBright`{bold ${f}} dosyası için yardım bilgisi eksik.`);
 		if (!props.conf) return log(chalk.redBright`{bold ${f}} dosyası için konfigürasyon bilgisi eksik.`);
 		if (props.conf.disabled === true) return;
-		if (props.slashCommand) {
-			client.slashCommands.set(
-				props.help.name,
-				props
-					.slashCommand(client)
-					.setName(props.slashCommand(client)?.name ?? props.help.name)
-					.setDescription(props.help.description)
-			);
-		}
+		const slashCommand = props?.slashCommand?.(client);
+		if (slashCommand) client.slashCommands.set(props.help.name, slashCommand.setName(slashCommand?.name ?? props.help.name).setDescription(props.help.description));
 		log(chalk.greenBright`Yüklenen komut {bold ${props.help.name}}.`);
 		BotLog.send(`**[Komut]** Yüklenen komut **${props.help.name}**.`);
 		client.commands.set(props.help.name, props);
@@ -231,8 +225,7 @@ client.on("messageCreate", async message => {
 });
 
 client.on("messageUpdate", async (oldMessage, newMessage) => {
-	if (newMessage.author.bot) return;
-	if (newMessage.channel.type === "DM") return;
+	if (newMessage.author.bot || newMessage.channel.type === "DM" || !newMessage.guild) return;
 	if (!newMessage.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) && newMessage.content.match(/\b(?:https?|ftp|hetepese):\/\/[a-z0-9-+&@#/%?=~_|!:,.;]*[a-z0-9-+&@#/%=~_|]/gim)) {
 		oldMessage.delete().catch(() => {});
 		newMessage.channel.send(`${config.emojis.error} ${config.unicodes.bullet} ${newMessage.author} Ben akıllı bir botum kanka.`).then(m => setTimeout(() => m?.delete?.(), config.deleteInterval));
@@ -241,7 +234,7 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
 
 client.on("guildCreate", guild => {
 	//! Leave
-	if (!guild.members.cache.find(u => config.owners.includes(u.id))) guild.fetchOwner().then(o => o.send(`**${guild.name}** adlı sunucuya çıkıyorum çünkü sadece **TurkishMethods** sunucusuna özel bir botum!`).then(_ => guild.leave()));
+	if (!guild.members.cache.find(u => config.owners.includes(u.id))) guild.fetchOwner().then(o => o.send(`**${guild.name}** adlı sunucudan çıkıyorum çünkü sadece **TurkishMethods** sunucusuna özel bir botum!`).then(_ => guild.leave()));
 });
 
 //! Rate

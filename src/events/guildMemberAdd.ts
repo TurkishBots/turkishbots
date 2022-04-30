@@ -1,6 +1,6 @@
 import { GuildMember, MessageAttachment, TextChannel } from "discord.js";
 import Canvas from "canvas";
-import path from "path";
+import path from "node:path";
 
 export default async (member: GuildMember) => {
 	const { client } = member;
